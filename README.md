@@ -1,8 +1,19 @@
-# SisMarket
-# Trabajo a desarrollar en el curso de Proyectos de Software II
+# admin
 
-# Enlaces de Herramientas Usadas
+## Project setup
+```
+npm install
+```
 
-https://trello.com/b/TcLFMwaO/aplicativo-kardex
+### Compiles and hot-reloads for development
+```
+npm run serve
+```
 
-https://sismarket.atlassian.net/jira/software/projects/SISMARKET/boards/3
+### Compiles and minifies for production
+```
+npm run build
+```
+
+### Customize configuration
+See [Configuration Reference](https://cli.vuejs.org/config/).
