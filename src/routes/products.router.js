@@ -5,7 +5,7 @@ const validatorHandler = require('./../middlewares/validator.handler');
 const {updateProductSchema, createProductSchema, getProductSchema} = require('./../schemas/products.schema');
 
 const router = express.Router();
-const service = new UserService();
+const service = new ProductService();
 
 router.get('/',async (req, res, next)=>{
   try {
