@@ -1,11 +1,10 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
-import registroUsuario from '../components/RegistroUsuario.vue'
 import listarUsuario from '../components/ListarUsuario.vue'
 import login from '../components/Login.vue'
 import cambiarPassword from '../components/CambiarPassword.vue'
-
+import recuperarPassword from '../components/RecuperarPassword.vue'
 
 Vue.use(VueRouter)
 
@@ -14,11 +13,6 @@ const routes = [
     path: '/',
     name: 'Home',
     component: Home,
-  },
-  {
-    path: '/registroUsuario',
-    name: 'registroUsuario',
-    component: registroUsuario,
   },
   {
     path: '/listarUsuario',
@@ -34,6 +28,11 @@ const routes = [
     path: '/cambiarPassword',
     name: 'cambiarPassword',
     component: cambiarPassword,
+  },
+  {
+    path: '/recuperarPassword',
+    name: 'recuperarPassword',
+    component: recuperarPassword,
   }
 ]
 

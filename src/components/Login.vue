@@ -6,7 +6,7 @@
     >
         <v-card>
             <v-card-title class="d-flex justify-center">
-            <span class="text-h5">Iniciar Sesión</span>
+            <span class="text-h4">Iniciar Sesión</span>
             </v-card-title>
             <v-card-text>
                 <v-container>
@@ -17,15 +17,19 @@
                             v-model="nombreUsuario"
                             label="Nombre usuario"
                             type="text"
+                            :rules="[rules.required]"
                             required
                             ></v-text-field>
                         </v-col>
                         <v-col cols="12">
                             <v-text-field
+                            :append-icon="mostrar1 ? 'visibility' : 'visibility_off'"
+                            :type="mostrar1 ? 'text' : 'password'"
+                            @click:append="mostrar1 = !mostrar1"
+                            :rules="[rules.required]"
                             prepend-icon="lock"
                             v-model="password"
                             label="Contraseña"
-                            type="password"
                             required
                             ></v-text-field>
                         </v-col>
@@ -34,7 +38,7 @@
                 <v-container class="d-flex justify-center">
                     <v-btn
                         text
-                        :to="{name: 'cambiarPassword'}"
+                        :to="{name: 'recuperarPassword'}"
                     >
                         ¿Olvido su contraseña?
                     </v-btn>
@@ -64,7 +68,11 @@ export default {
         dialog: true,
         nombreusuario: '',
         password: '',
-       
+        rules: {
+           required: value => !!value || 'Campo requerido',
+           min: v => v.length >= 6 || 'Minimo 6 caracteres',
+        },
+        mostrar1: false,
     }),
     methods:{
         ingresar(){
