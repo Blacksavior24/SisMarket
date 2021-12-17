@@ -9,7 +9,7 @@
 
 [TOC]
 
-#Instalando paquetes
+# Instalando paquetes
 
 npm install
 e instalará los siguientes paquetes:
@@ -44,7 +44,7 @@ e instalará los siguientes paquetes:
 -   "vue-template-compiler": "^2.6.11",
 -   "vuetify-loader": "^1.7.0"
 
-#Corriendo docker
+# Corriendo docker
 
 docker-compose up -d postgres
 - así corre la base de datos.
@@ -55,7 +55,7 @@ docker-compose up -d pgadmin
 
 docker-compose ps
 - así veremos los contenedores funcionando.
-#Corriendo base de datos en el contenedor docker
+# Corriendo base de datos en el contenedor docker
 
 - Una vez entrando al localhost:5050 veremos un entorno gráfico pgdamin
 - Luego de eso se pone "agregar servidor"
@@ -66,7 +66,7 @@ docker-compose ps
   - Usuario: ward
   - Pass: admin123
 
-#Iniciando la aplicación
+# Iniciando la aplicación
 ...
 # SisMarket
  Trabajo a desarrollar en el curso de Proyectos de Software II
