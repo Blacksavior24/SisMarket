@@ -144,10 +144,8 @@
 </template>
 
 <script>
-import registrarUsuario from './components/RegistroUsuario'
 export default {
   name: 'App',
-  components: {registrarUsuario},
   data: () => ({
       selectedItem: 0,
       items: [
