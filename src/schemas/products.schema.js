@@ -1,12 +1,3 @@
-<<<<<<< HEAD
-console.log('hola ');
-console.log('hola ');
-console.log('hola ');
-console.log('hola ');
-console.log('hola ');
-console.log('hola ');
-console.log('hola ');
-=======
 const Joi = require('joi');
 
 const id = Joi.number().integer();
@@ -25,4 +16,3 @@ const getProductSchema = Joi.object({
 });
 
 module.exports = { createProductSchema, updateProductSchema, getProductSchema }
->>>>>>> 8b020aa5f7cbbe868624251da27e3df5c3fa21f1
