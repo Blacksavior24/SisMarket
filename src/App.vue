@@ -62,17 +62,17 @@
                 <v-list-item-title>Almacen</v-list-item-title>
               </v-list-item-content>
             </template>
-            <v-list-item :to="{ name: ''}">
+            <v-list-item :to="{ name: 'Categoria'}">
               <v-list-item-icon>
-                <v-icon>face</v-icon>
+                <v-icon>category</v-icon>
               </v-list-item-icon>
-              <v-list-item-title>Sub-modulo2</v-list-item-title>
+              <v-list-item-title>Categoria</v-list-item-title>
             </v-list-item>
             <v-list-item :to="{ name: ''}">
               <v-list-item-icon>
-                <v-icon>manage_accounts</v-icon>
+                <v-icon>fence</v-icon>
               </v-list-item-icon>
-              <v-list-item-title>Sub-modulo2</v-list-item-title>
+              <v-list-item-title>Productos</v-list-item-title>
             </v-list-item> 
           </v-list-group>
         </template>

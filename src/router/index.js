@@ -5,6 +5,7 @@ import listarUsuario from '../components/ListarUsuario.vue'
 import login from '../components/Login.vue'
 import cambiarPassword from '../components/CambiarPassword.vue'
 import recuperarPassword from '../components/RecuperarPassword.vue'
+import Categoria from '../components/Categoria.vue'
 
 Vue.use(VueRouter)
 
@@ -33,6 +34,11 @@ const routes = [
     path: '/recuperarPassword',
     name: 'recuperarPassword',
     component: recuperarPassword,
+  },
+  {
+    path: '/Categoria',
+    name: 'Categoria',
+    component: Categoria
   }
 ]
 
