@@ -5,11 +5,11 @@ const routerApi = require('./src/routes')
 const {logErrors, errorHandler, boomErrorHandler} = require('./src/middlewares/error.handler');
 
 const app = express();
-const port = process.env.PORT || 3001;
+const port = process.env.PORT || 3000;
 
 app.use(express.json());
-
-const whitelist = ['http://localhost:8080', 'https://myapp.co'];
+/*
+const whitelist = ['http://localhost:8080', 'https://myapp.co'];//colocar la url del front que corre para que acepté la peticion
 const options = {
   origin: (origin, callback)=>{
     if (whitelist.includes(origin)|| !origin) {
@@ -20,7 +20,7 @@ const options = {
   }
 }
 app.use(cors(options));
-
+*/
 app.get('/', (req, res)=>{
   res.send('hola mi server');
 });

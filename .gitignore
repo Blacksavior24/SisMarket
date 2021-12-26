@@ -29,6 +29,7 @@ yarn-error.log
 
 
 postgres_data
+mysql_data
 .env
 
 # End of https://www.toptal.com/developers/gitignore/api/vuejs,visualstudiocode
