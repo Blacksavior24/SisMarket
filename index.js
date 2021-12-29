@@ -18,9 +18,9 @@ const options = {
       callback(new Error('no permitido'));
     }
   }
-}
-app.use(cors(options));
-*/
+}*/
+app.use(cors());
+
 app.get('/', (req, res)=>{
   res.send('hola mi server');
 });
