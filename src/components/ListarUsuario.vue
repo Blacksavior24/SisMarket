@@ -20,7 +20,7 @@
                             v-on="on"
                             class="primary"
                             >
-                            Agregar Nuevo
+                            Nuevo
                             </v-btn>
                             
                         </template>
@@ -33,28 +33,28 @@
                             <v-container grid-list-md>
                                 <v-row>
                                     <v-col xs12 sm6 md4>
-                                        <v-text-field v-model="editedItem.nApellidos" label="Nombres y Apellidos"></v-text-field>
+                                        <v-text-field v-model="editedItem.fullname" label="Nombres y Apellidos"></v-text-field>
                                     </v-col>
                                 </v-row>
                             </v-container>
                             <v-container grid-list-md>
                                 <v-row>
                                     <v-col xs12 sm6 md4>
-                                        <v-text-field v-model="editedItem.usuario" label="Nombre Usuario"></v-text-field>
+                                        <v-text-field v-model="editedItem.user" label="Nombre Usuario"></v-text-field>
                                     </v-col>
                                     <v-col xs12 sm6 md4>
-                                        <v-text-field v-model="editedItem.correo" label="Correo"></v-text-field>
+                                        <v-text-field v-model="editedItem.email" label="Correo"></v-text-field>
                                     </v-col>
                                 </v-row>
                             </v-container>
                             <v-container grid-list-md>
                                 <v-row>
                                     <v-col xs12 sm6 md4>
-                                        <v-select v-model="editedItem.tDocumento" :items="tDocumento" label="Tipo Documento">
+                                        <v-select v-model="editedItem.typeIDcard" :items="tDocumento" label="Tipo Documento">
                                         </v-select>
                                     </v-col>
                                     <v-col xs12 sm6 md4>
-                                        <v-text-field v-model="editedItem.nDocumento" label="Número Documento"></v-text-field>
+                                        <v-text-field v-model="editedItem.IDcard" label="Número Documento"></v-text-field>
                                     </v-col>
                                 </v-row>
                             </v-container>
@@ -64,18 +64,18 @@
                                         <v-text-field v-model="editedItem.password" label="Contraseña"></v-text-field>
                                     </v-col>
                                     <v-col xs12 sm6 md4>
-                                        <v-text-field v-model="editedItem.telefono" label="Teléfono"></v-text-field>
+                                        <v-text-field v-model="editedItem.phone" label="Teléfono"></v-text-field>
                                     </v-col>
                                 </v-row>
                             </v-container>
                             <v-container grid-list-md>
                                 <v-row>
                                     <v-col xs12 sm6 md4>
-                                        <v-select v-model="editedItem.rol" :items="rol" label="Rol">
+                                        <v-select v-model="editedItem.role" :items="rol" label="Rol">
                                         </v-select>
                                     </v-col>
                                     <v-col xs12 sm6 md4>
-                                        <v-select v-model="editedItem.estado" :items="estado" label="Estado">
+                                        <v-select v-model="editedItem.status" :items="estado" label="Estado">
                                         </v-select>
                                     </v-col>
                                 </v-row>
@@ -116,20 +116,21 @@
     </v-layout>
 </template>
 <script>
+    import axios from 'axios';
     export default {
         data(){
             return {
                 dialog: false,
                 headers: [
-                    { text: 'Usuario', align: 'left', value: 'usuario',sortable: false },
-                    { text: 'Nombre Apellido', value: 'nApellidos' },
-                    { text: 'Tipo Documento', value: 'tDocumento',sortable: false },
-                    { text: 'Num. Documento', value: 'nDocumento',sortable: false },
-                    { text: 'Correo', value: 'correo',sortable: false },
-                    { text: 'Rol', value: 'rol' },
-                    { text: 'Teléfono', value: 'telefono',sortable: false },
+                    { text: 'Usuario', align: 'left', value: 'user',sortable: false },
+                    { text: 'Nombre Apellido', value: 'fullname' },
+                    { text: 'Tipo Documento', value: 'typeIDcard',sortable: false },
+                    { text: 'Num. Documento', value: 'IDcard',sortable: false },
+                    { text: 'Correo', value: 'email',sortable: false },
+                    { text: 'Rol', value: 'role' },
+                    { text: 'Teléfono', value: 'phone',sortable: false },
                     { text: 'Password', value: 'password',sortable: false },
-                    { text: 'Estado', value: 'estado',sortable: false },
+                    { text: 'Estado', value: 'status',sortable: false },
                     { text: 'Opciones', value: 'opciones', sortable: false }
                 ],
                 search: '',
@@ -139,26 +140,26 @@
                 rol: ['administrador', 'vendedor', 'almacenero', 'cajero'],
                 estado: ['activo', 'inactivo'],
                 editedItem: {
-                    usuario: '',
-                    nApellidos: '',
-                    tDocumento: '',
-                    nDocumento: '',
-                    correo: '',
-                    rol:'',
-                    telefono:'',
+                    user: '',
+                    fullname: '',
+                    typeIDcard: '',
+                    IDcard: '',
+                    email: '',
+                    role:'',
+                    phone:'',
                     password: '', 
-                    estado: '',
+                    status: '',
                     },
                 defaultItem: {
-                    usuario: '',
-                    nApellidos: '',
-                    tDocumento: '',
-                    nDocumento: '',
-                    correo: '',
-                    rol:'',
-                    telefono:'',
+                    user: '',
+                    fullname: '',
+                    typeIDcard: '',
+                    IDcard: '',
+                    email: '',
+                    role:'',
+                    phone:'',
                     password: '', 
-                    estado: '',
+                    status: '',
                     }
             }
         },
@@ -182,52 +183,38 @@
 
             },
             initialize () {
+                let me=this;
+                axios.get('http://localhost:3000/api/v1/users').then(function(response){
+                    //console.log(response);
+                    me.desserts=response.data;
+                }).catch(function(error){
+                    console.log(error);
+                });
+            /*
             this.desserts = [
                 {
-                usuario: 'Elmer',
-                nApellidos: 'Elmer Callo Mamani',
-                tDocumento: 'DNI',
-                nDocumento: '71878989',
-                correo: 'elmer@gmail.com',
-                rol:'administrador',
-                telefono:'989878787',
+                user: 'Elmer',
+                fullname: 'Elmer Callo Mamani',
+                typeIDcard: 'DNI',
+                IDcard: '71878989',
+                email: 'elmer@gmail.com',
+                role:'administrador',
+                phone:'989878787',
                 password: '1234567',
-                estado: 'activo',
+                status: 'activo',
                 },
                 {
-                usuario: 'Miguel',
-                nApellidos: 'Miguel Mancha Calvo',
-                tDocumento: 'DNI',
-                nDocumento: '02323243',
-                correo: 'miguel@gmail.com',
-                rol:'almacenero',
-                telefono:'908765432',
+                user: 'Miguel',
+                fullname: 'Miguel Mancha Calvo',
+                typeIDcard: 'DNI',
+                IDcard: '02323243',
+                email: 'miguel@gmail.com',
+                role:'almacenero',
+                phone:'908765432',
                 password: '3465435',
-                estado: 'inactivo',
+                status: 'inactivo',
                 },
-                {
-                usuario: 'Marco',
-                nApellidos: 'Elmer Lopez Javier',
-                tDocumento: 'RUC',
-                nDocumento: '02718283552',
-                correo: 'marco@gmail.com',
-                rol:'cajero',
-                telefono:'980787666',
-                password: '1546345',
-                estado: 'activo',
-                },
-                {
-                usuario: 'Carlos',
-                nApellidos: 'Carlos Suvia Oblitas',
-                tDocumento: 'DNI',
-                nDocumento: '021898766',
-                correo: 'carlos@gamil.com',
-                rol:'vendedor',
-                telefono:'999878787',
-                password: '8796786',
-                estado: 'inactivo',
-                },
-            ]
+            ]*/
             },
 
             editItem (item) {
