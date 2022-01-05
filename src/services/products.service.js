@@ -1,30 +1,57 @@
 const boom = require('@hapi/boom');
 
-class ProductService {
-  constructor() {}
+const {models} = require('./../libs/sequelize');
+
+class ProductsService {
+
+  constructor(){
+  }
 
   async create(data) {
-    return data;
+    const newProduct = await models.Product.create(data);
+    return newProduct;
   }
 
   async find() {
-    return [];
+    const products = await models.Product.findAll({
+      include: ['category']
+    });
+    return products;
   }
 
   async findOne(id) {
-    return { id };
+    const product = this.products.find(item => item.id === id);
+    if (!product) {
+      throw boom.notFound('product not found');
+    }
+    if (product.isBlock) {
+      throw boom.conflict('product is block');
+    }
+    return product;
   }
 
   async update(id, changes) {
-    return {
-      id,
-      changes,
+    const index = this.products.findIndex(item => item.id === id);
+    if (index === -1) {
+      throw boom.notFound('product not found');
+    }
+    const product = this.products[index];
+    this.products[index] = {
+      ...product,
+      ...changes
     };
+    return this.products[index];
   }
 
   async delete(id) {
+    const index = this.products.findIndex(item => item.id === id);
+    if (index === -1) {
+      throw boom.notFound('product not found');
+    }
+    this.products.splice(index, 1);
     return { id };
   }
+
 }
 
-module.exports = ProductService;
+module.exports = ProductsService;

@@ -6,7 +6,7 @@ async function getConnection(){
     port: 5432,
     user: 'ward',
     password: 'admin123',
-    database: 'my_store'
+    database: 'sismarket'
   });
   await client.connect();
   return client;
