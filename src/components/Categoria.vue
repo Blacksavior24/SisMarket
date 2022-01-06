@@ -67,7 +67,7 @@
 </template>
 
 <script>
-    //import axios from 'axios';
+    import axios from 'axios';
     export default {
         data:()=>({
             search: '',
@@ -76,7 +76,7 @@
             /*Listar Categoria */
             listaCategoria: [
                 { text: 'Opciones', value: 'actions', sortable: false },
-                { text: 'Nombre', value: '' },
+                { text: 'Nombre', value: 'user' },
                 { text: 'Descripcion', value: '', sortable: false  },
                 { text: 'Estado', value: '', sortable: false  }
             ],
@@ -118,12 +118,12 @@
             },
             listar(){
                 let me=this;
-                /*axios.get('').then(function(response){
-                    //console.log(response);
+                axios.get('http://localhost:3000/api/v1/users').then(function(response){
+                    console.log(response);
                     me.categoria=response.data;
                 }).catch(function(error){
                     console.log(error);
-                });*/
+                });
             },
 
             editItem (item) {
