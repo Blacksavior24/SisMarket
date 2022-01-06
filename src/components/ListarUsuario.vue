@@ -30,52 +30,61 @@
                             </v-card-title>
                 
                             <v-card-text>
+                                
                             <v-container grid-list-md>
                                 <v-row>
                                     <v-col xs12 sm6 md4>
-                                        <v-text-field v-model="editedItem.fullname" label="Nombres y Apellidos"></v-text-field>
+                                        <v-text-field v-model="id" label="ID"></v-text-field>
+                                    </v-col>
+                                </v-row>
+                            </v-container>
+
+                            <v-container grid-list-md>
+                                <v-row>
+                                    <v-col xs12 sm6 md4>
+                                        <v-text-field v-model="fullname" label="Nombres y Apellidos"></v-text-field>
                                     </v-col>
                                 </v-row>
                             </v-container>
                             <v-container grid-list-md>
                                 <v-row>
                                     <v-col xs12 sm6 md4>
-                                        <v-text-field v-model="editedItem.user" label="Nombre Usuario"></v-text-field>
+                                        <v-text-field v-model="user" label="Nombre Usuario"></v-text-field>
                                     </v-col>
                                     <v-col xs12 sm6 md4>
-                                        <v-text-field v-model="editedItem.email" label="Correo"></v-text-field>
+                                        <v-text-field v-model="email" label="Correo"></v-text-field>
                                     </v-col>
                                 </v-row>
                             </v-container>
                             <v-container grid-list-md>
                                 <v-row>
                                     <v-col xs12 sm6 md4>
-                                        <v-select v-model="editedItem.typeIDcard" :items="tDocumento" label="Tipo Documento">
+                                        <v-select v-model="typeIDcard" :items="tDocumento" label="Tipo Documento">
                                         </v-select>
                                     </v-col>
                                     <v-col xs12 sm6 md4>
-                                        <v-text-field v-model="editedItem.IDcard" label="Número Documento"></v-text-field>
+                                        <v-text-field v-model="IDcard" label="Número Documento"></v-text-field>
                                     </v-col>
                                 </v-row>
                             </v-container>
                             <v-container grid-list-md>
                                 <v-row>
                                     <v-col xs12 sm6 md4>
-                                        <v-text-field v-model="editedItem.password" label="Contraseña"></v-text-field>
+                                        <v-text-field v-model="password" label="Contraseña" type="password"></v-text-field>
                                     </v-col>
                                     <v-col xs12 sm6 md4>
-                                        <v-text-field v-model="editedItem.phone" label="Teléfono"></v-text-field>
+                                        <v-text-field v-model="phone" label="Teléfono"></v-text-field>
                                     </v-col>
                                 </v-row>
                             </v-container>
                             <v-container grid-list-md>
                                 <v-row>
                                     <v-col xs12 sm6 md4>
-                                        <v-select v-model="editedItem.role" :items="rol" label="Rol">
+                                        <v-select v-model="role" :items="rol" label="Rol">
                                         </v-select>
                                     </v-col>
                                     <v-col xs12 sm6 md4>
-                                        <v-select v-model="editedItem.status" :items="estado" label="Estado">
+                                        <v-select v-model="status" :items="estado" label="Estado">
                                         </v-select>
                                     </v-col>
                                 </v-row>
@@ -120,6 +129,18 @@
     export default {
         data(){
             return {
+                id: '',
+
+                user: '',
+                fullname: '',
+                typeIDcard: '',
+                IDcard: '',
+                email: '',
+                role:'',
+                phone:'',
+                password: '', 
+                status: '',
+                
                 dialog: false,
                 headers: [
                     { text: 'Usuario', align: 'left', value: 'user',sortable: false },
@@ -168,16 +189,28 @@
             return this.editedIndex === -1 ? 'Agregar nuevo' : 'Editar usuario'
             }
         },
+
         watch: {
             dialog (val) {
             val || this.close()
             }
         },
+
         created () {
             this.initialize()
+            /*this.defaultItem.user = "samuelf"
+            this.defaultItem.fullname = "Samuel Fernando pillot"
+            this.defaultItem.typeIDcard = "DNI"
+            this.defaultItem.IDcard = "71424242"
+            this.defaultItem.email = "samuel@gmail.com"
+            this.defaultItem.role = "almacenero"
+            this.defaultItem.phone = "933222222"
+            this.defaultItem.password = "samuel123"
+            this.defaultItem.status = "activo"*/
         },
         methods:{
             estadoActualizar(){
+
             },
             initialize () {
                 let me=this;
@@ -213,29 +246,111 @@
                 },
             ]*/
             },
+
             editItem (item) {
-            this.editedIndex = this.desserts.indexOf(item)
-            this.editedItem = Object.assign({}, item)
+            //this.editedIndex = this.desserts.indexOf(item)
+            //this.editedItem = Object.assign({}, item)
             this.dialog = true
+            this.id = item.id;
+            this.user = item.user;
+            this.fullname = item.fullname;
+            this.typeIDcard = item.typeIDcard;
+            this.IDcard = item.IDcard;
+            this.email = item.email;
+            this.role = item.role;
+            this.phone = item.phone;
+            this.password = item.password;
+            this.status = item.status;
+            this.editedIndex = 1;
             },
+
             deleteItem (item) {
-            const index = this.desserts.indexOf(item)
-            confirm('¿Estas seguro de eliminar?') && this.desserts.splice(index, 1)
+                let me = this;
+                axios.delete('http://localhost:3000/api/v1/users/'+item.id).then(function(response){
+                    me.initialize();
+                    alert("Eliminado correctamente")
+                }).catch(function(error){
+                    console.log(error)
+                })
             },
+
             close () {
             this.dialog = false
-            setTimeout(() => {
-                this.editedItem = Object.assign({}, this.defaultItem)
-                this.editedIndex = -1
-            }, 300)
+            this.limpiar();
             },
+
+            limpiar(){
+                this.id = "";
+                this.user = "";
+                this.fullname = "";
+                this.typeIDcard = "";
+                this.IDcard = "";
+                this.email = "";
+                this.role = "";
+                this.phone = "";
+                this.password = "";
+                this.status = "";
+                this.editedIndex = -1;
+            },
+
             save () {
-            if (this.editedIndex > -1) {
-                Object.assign(this.desserts[this.editedIndex], this.editedItem)
-            } else {
-                this.desserts.push(this.editedItem)
-            }
-            this.close()
+                if (this.editedIndex > -1) {
+                    //Object.assign(this.desserts[this.editedIndex], this.editedItem)
+                    let me = this;
+                    axios.patch('http://localhost:3000/api/v1/users/'+parseInt(this.id),{
+                        'id': parseInt(this.id),
+                        'user': this.user,
+                        'fullname': this.fullname,
+                        'typeIDcard': this.typeIDcard,
+                        'IDcard': this.IDcard,
+                        'email': this.email,
+                        'role': this.role,
+                        'phone': this.phone,
+                        'password': this.password,
+                        'status': this.status,
+                        'createdAt': "2021-12-23T00:00:00.000Z"
+                    }).then(function(response){
+                        me.close();
+                        me.initialize();
+                        me.limpiar();
+                    }).catch(function(error){
+                        console.log(error)
+                    })
+                } else {
+                    //this.desserts.push(this.editedItem)
+                    let me = this;
+                    axios.post('http://localhost:3000/api/v1/users/',{
+                        'id': parseInt(this.id),
+                        'user': this.user,
+                        'fullname': this.fullname,
+                        'typeIDcard': this.typeIDcard,
+                        'IDcard': this.IDcard,
+                        'email': this.email,
+                        'role': this.role,
+                        'phone': this.phone,
+                        'password': this.password,
+                        'status': this.status,
+                        'createdAt': "2021-12-23T00:00:00.000Z"
+                        /*'id': 6,
+                        'user': "Miguel",
+                        'fullname': "Miguel carbajal Pizarro",
+                        'typeIDcard': "DNI",
+                        'IDcard': "832322222",
+                        'email': "miguel@gmail.com",
+                        'role': "almacenero",
+                        'phone': "951976543",
+                        'password': "miguel123",
+                        'status': "activo",
+                        'createdAt': "2021-12-23T00:00:00.000Z"*/
+                    }).then(function(response){
+                        me.close();
+                        me.initialize();
+                        me.limpiar();
+                    }).catch(function(error){
+                        console.log(error)
+                    })
+                }
+                this.close();
             }
         }        
     }
