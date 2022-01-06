@@ -11,26 +11,26 @@
                     <v-spacer></v-spacer>
                     <v-text-field class="text-xs-center" v-model="search" append-icon="search" label="Búsqueda" single-line hide-details></v-text-field>
                     <v-spacer></v-spacer>
-                    
+
                     <v-dialog v-model="dialog" max-width="500px">
                         <!--<v-btn slot="activator" color="primary" dark class="mb-2">Agregar nuevo</v-btn>-->
                         <template v-slot:activator="{ on, attrs }">
-                            <v-btn 
+                            <v-btn
                             v-bind="attrs"
                             v-on="on"
                             class="primary"
                             >
                             Nuevo
                             </v-btn>
-                            
+
                         </template>
                         <v-card>
                             <v-card-title>
                             <span class="headline">{{ formTitle }}</span>
                             </v-card-title>
-                
+
                             <v-card-text>
-                                
+
                             <v-container grid-list-md>
                                 <v-row>
                                     <v-col xs12 sm6 md4>
@@ -90,7 +90,7 @@
                                 </v-row>
                             </v-container>
                             </v-card-text>
-                
+
                             <v-card-actions>
                             <v-spacer></v-spacer>
                             <v-btn color="primary" @click.native="close">Cancelar</v-btn>
@@ -138,9 +138,9 @@
                 email: '',
                 role:'',
                 phone:'',
-                password: '', 
+                password: '',
                 status: '',
-                
+
                 dialog: false,
                 headers: [
                     { text: 'Usuario', align: 'left', value: 'user',sortable: false },
@@ -168,7 +168,7 @@
                     email: '',
                     role:'',
                     phone:'',
-                    password: '', 
+                    password: '',
                     status: '',
                     },
                 defaultItem: {
@@ -179,7 +179,7 @@
                     email: '',
                     role:'',
                     phone:'',
-                    password: '', 
+                    password: '',
                     status: '',
                     }
             }
@@ -307,8 +307,8 @@
                         'role': this.role,
                         'phone': this.phone,
                         'password': this.password,
-                        'status': this.status,
-                        'createdAt': "2021-12-23T00:00:00.000Z"
+                        'status': this.status
+                        //'createdAt': "2021-12-23T00:00:00.000Z"
                     }).then(function(response){
                         me.close();
                         me.initialize();
@@ -330,7 +330,7 @@
                         'phone': this.phone,
                         'password': this.password,
                         'status': this.status,
-                        'createdAt': "2021-12-23T00:00:00.000Z"
+                        //'createdAt': "2021-12-23T00:00:00.000Z"
                     }).then(function(response){
                         me.close();
                         me.initialize();
@@ -341,6 +341,6 @@
                 }
                 this.close();
             }
-        }        
+        }
     }
 </script>
