@@ -3,7 +3,6 @@ const Joi = require('joi');
 const id = Joi.number().integer();
 const email = Joi.string().email();
 const password = Joi.string().min(8);
-const role = Joi.string().min(5)
 
 const user = Joi.string();
 const fullname = Joi.string();
@@ -26,22 +25,11 @@ const createUserSchema = Joi.object({
   role: role.required(),
   phone: phone.required(),
   password: password.required(),
-<<<<<<< HEAD
-  role: role.required()
-});
-
-const updateUserSchema = Joi.object({
-  email: email,
-  role: role,
-=======
   status: status.required(),
-  createdAt: createdAt.required(),
-  //role: role.required()
+  createdAt: createdAt.required()
 });
 
 const updateUserSchema = Joi.object({
-  //email: email,
-  //role: role,
   id: id.required(),
   user: user.required(),
   fullname: fullname.required(),
@@ -52,8 +40,7 @@ const updateUserSchema = Joi.object({
   phone: phone.required(),
   password: password.required(),
   status: status.required(),
-  createdAt: createdAt.required(),
->>>>>>> roy
+  createdAt: createdAt.required()
 });
 
 const getUserSchema = Joi.object({
