@@ -259,6 +259,7 @@
 
             save () {
                 if (this.editedIndex > -1) {
+                    //Object.assign(this.desserts[this.editedIndex], this.editedItem)
                     let me = this;
                     axios.patch('http://localhost:3000/api/v1/users/'+parseInt(this.id),{
                         'id': parseInt(this.id),
@@ -280,6 +281,7 @@
                         console.log(error)
                     })
                 } else {
+                    //this.desserts.push(this.editedItem)
                     let me = this;
                     axios.post('http://localhost:3000/api/v1/users/',{
                         'id': parseInt(this.id),
