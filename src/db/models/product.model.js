@@ -23,6 +23,14 @@ const ProductSchema = {
     type: DataTypes.TEXT,
     allowNull: false,
   },
+  purchasePrice:{
+    type: DataTypes.DECIMAL(11,2),
+    allowNull: false
+  },
+  salePrice:{
+    type: DataTypes.DECIMAL(11,2),
+    allowNull: false
+  },
   createdAt:{
     allowNull: false,
     type: DataTypes.DATE,
