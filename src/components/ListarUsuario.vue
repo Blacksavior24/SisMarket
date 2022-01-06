@@ -168,19 +168,16 @@
             return this.editedIndex === -1 ? 'Agregar nuevo' : 'Editar usuario'
             }
         },
-
         watch: {
             dialog (val) {
             val || this.close()
             }
         },
-
         created () {
             this.initialize()
         },
         methods:{
             estadoActualizar(){
-
             },
             initialize () {
                 let me=this;
@@ -216,18 +213,15 @@
                 },
             ]*/
             },
-
             editItem (item) {
             this.editedIndex = this.desserts.indexOf(item)
             this.editedItem = Object.assign({}, item)
             this.dialog = true
             },
-
             deleteItem (item) {
             const index = this.desserts.indexOf(item)
             confirm('¿Estas seguro de eliminar?') && this.desserts.splice(index, 1)
             },
-
             close () {
             this.dialog = false
             setTimeout(() => {
@@ -235,7 +229,6 @@
                 this.editedIndex = -1
             }, 300)
             },
-
             save () {
             if (this.editedIndex > -1) {
                 Object.assign(this.desserts[this.editedIndex], this.editedItem)
