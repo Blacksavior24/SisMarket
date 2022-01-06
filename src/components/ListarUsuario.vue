@@ -198,15 +198,6 @@
 
         created () {
             this.initialize()
-            /*this.defaultItem.user = "samuelf"
-            this.defaultItem.fullname = "Samuel Fernando pillot"
-            this.defaultItem.typeIDcard = "DNI"
-            this.defaultItem.IDcard = "71424242"
-            this.defaultItem.email = "samuel@gmail.com"
-            this.defaultItem.role = "almacenero"
-            this.defaultItem.phone = "933222222"
-            this.defaultItem.password = "samuel123"
-            this.defaultItem.status = "activo"*/
         },
         methods:{
             estadoActualizar(){
@@ -220,36 +211,9 @@
                 }).catch(function(error){
                     console.log(error);
                 });
-            /*
-            this.desserts = [
-                {
-                user: 'Elmer',
-                fullname: 'Elmer Callo Mamani',
-                typeIDcard: 'DNI',
-                IDcard: '71878989',
-                email: 'elmer@gmail.com',
-                role:'administrador',
-                phone:'989878787',
-                password: '1234567',
-                status: 'activo',
-                },
-                {
-                user: 'Miguel',
-                fullname: 'Miguel Mancha Calvo',
-                typeIDcard: 'DNI',
-                IDcard: '02323243',
-                email: 'miguel@gmail.com',
-                role:'almacenero',
-                phone:'908765432',
-                password: '3465435',
-                status: 'inactivo',
-                },
-            ]*/
             },
 
             editItem (item) {
-            //this.editedIndex = this.desserts.indexOf(item)
-            //this.editedItem = Object.assign({}, item)
             this.dialog = true
             this.id = item.id;
             this.user = item.user;
