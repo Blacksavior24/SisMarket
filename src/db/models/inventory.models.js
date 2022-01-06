@@ -37,7 +37,7 @@ const InventorySchema = {
   }
 }
 
-class Product extends Model{
+class Inventory extends Model{
   static associate(models){
     this.belongsTo(models.Product, {as: 'product'});
   }
