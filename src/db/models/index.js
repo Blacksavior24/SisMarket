@@ -8,7 +8,7 @@ function setupModels(sequelize){
   User.init(UserSchema, User.config(sequelize));
   Category.init(CategorySchema, Category.config(sequelize));
   Product.init(ProductSchema, Product.config(sequelize));
-  Inventory.init(InventorySchema, Invetory.config(sequelize));
+  Inventory.init(InventorySchema, Inventory.config(sequelize));
 
 
 
