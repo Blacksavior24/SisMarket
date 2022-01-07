@@ -14,7 +14,7 @@ function setupModels(sequelize){
 
   Category.associate(sequelize.models);
   Product.associate(sequelize.models);
-  Invetory.associate(sequelize.models);
+  Inventory.associate(sequelize.models);
 }
 
 
