@@ -75,9 +75,9 @@
             dialogDelete: false,
             /*Listar Categoria */
             listaCategoria: [
-                { text: 'Opciones', value: 'actions', sortable: false },
-                { text: 'Nombre', value: 'user' },
-                { text: 'Descripcion', value: '', sortable: false  },
+                { text: 'Nombre', value: 'name' },
+                //{ text: 'Fecha', value: 'created_at', sortable: false },
+                { text: 'Descripción', value: '', sortable: false  },
                 { text: 'Estado', value: '', sortable: false  }
             ],
             categoria:[],
@@ -118,8 +118,8 @@
             },
             listar(){
                 let me=this;
-                axios.get('http://localhost:3000/api/v1/users').then(function(response){
-                    console.log(response);
+                axios.get('api/v1/categories').then(function(response){
+                    //console.log(response);
                     me.categoria=response.data;
                 }).catch(function(error){
                     console.log(error);

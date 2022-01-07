@@ -27,95 +27,97 @@
     >
       <v-list dense>
         <template>
-          <v-list-item :to="{ name: 'Home'}">
-            <v-list-item-icon>
-              <v-icon>home</v-icon>
-            </v-list-item-icon>
-            <v-list-item-title>Inicio</v-list-item-title>
-          </v-list-item>
+          <v-list-item-group color="primary">
+            <v-list-item :to="{ path: '/'}">
+              <v-list-item-icon>
+                <v-icon>home</v-icon>
+              </v-list-item-icon>
+              <v-list-item-title>Inicio</v-list-item-title>
+            </v-list-item>
+          </v-list-item-group>
         </template>
         <template>
-          <v-list-group>
+          <v-list-group :value="false" prepend-icon="accessibility">
             <template v-slot:activator>
               <v-list-item-content>
-                <v-list-item-title>Accesos</v-list-item-title>
-              </v-list-item-content>
+                  <v-list-item-title>Accesos</v-list-item-title>
+                </v-list-item-content>
             </template>
-            <v-list-item :to="{ name: 'listarUsuario'}">
+            <v-list-item :to="{ path: 'listarUsuario'}">
+              <v-list-item-title>Usuarios</v-list-item-title>
               <v-list-item-icon>
                 <v-icon>people</v-icon>
               </v-list-item-icon>
-              <v-list-item-title>Usuarios</v-list-item-title>
             </v-list-item>
-            <v-list-item :to="{ name: ''}">
+            <v-list-item :to="{ path: 'Ejemplo_0'}">
+              <v-list-item-title>Roles</v-list-item-title>
               <v-list-item-icon>
                 <v-icon>manage_accounts</v-icon>
               </v-list-item-icon>
-              <v-list-item-title>Roles</v-list-item-title>
-            </v-list-item> 
+            </v-list-item>
           </v-list-group>
         </template>
         <template>
-          <v-list-group>
+          <v-list-group :value="false" prepend-icon="domain">
             <template v-slot:activator>
               <v-list-item-content>
-                <v-list-item-title>Almacen</v-list-item-title>
-              </v-list-item-content>
+                  <v-list-item-title>Almacen</v-list-item-title>
+                </v-list-item-content>
             </template>
-            <v-list-item :to="{ name: 'Categoria'}">
+            <v-list-item :to="{ path: 'Categoria'}">
+              <v-list-item-title>Categorias</v-list-item-title>
               <v-list-item-icon>
                 <v-icon>category</v-icon>
               </v-list-item-icon>
-              <v-list-item-title>Categoria</v-list-item-title>
             </v-list-item>
-            <v-list-item :to="{ name: ''}">
+            <v-list-item :to="{ path: 'Ejemplo_02'}">
+              <v-list-item-title>Productos</v-list-item-title>
               <v-list-item-icon>
                 <v-icon>fence</v-icon>
               </v-list-item-icon>
-              <v-list-item-title>Productos</v-list-item-title>
-            </v-list-item> 
+            </v-list-item>
           </v-list-group>
         </template>
         <template>
-          <v-list-group>
+          <v-list-group :value="false" prepend-icon="add_shopping_cart">
             <template v-slot:activator>
               <v-list-item-content>
-                <v-list-item-title>Compras</v-list-item-title>
-              </v-list-item-content>
+                  <v-list-item-title>Compras</v-list-item-title>
+                </v-list-item-content>
             </template>
-            <v-list-item :to="{ name: ''}">
+            <v-list-item :to="{ path: 'Ejemplo_03'}">
+              <v-list-item-title>Sub-modulo-3</v-list-item-title>
               <v-list-item-icon>
-                <v-icon>face</v-icon>
+                <v-icon>wb_iridescent</v-icon>
               </v-list-item-icon>
-              <v-list-item-title>Sub-modulo2</v-list-item-title>
             </v-list-item>
-            <v-list-item :to="{ name: ''}">
+            <v-list-item :to="{ path: 'Ejemplo_04'}">
+              <v-list-item-title>Sub-modulo-3</v-list-item-title>
               <v-list-item-icon>
-                <v-icon>manage_accounts</v-icon>
+                <v-icon>wb_iridescent</v-icon>
               </v-list-item-icon>
-              <v-list-item-title>Sub-modulo2</v-list-item-title>
-            </v-list-item> 
+            </v-list-item>
           </v-list-group>
         </template>
         <template>
-          <v-list-group>
+          <v-list-group :value="false" prepend-icon="price_change">
             <template v-slot:activator>
               <v-list-item-content>
-                <v-list-item-title>Ventas</v-list-item-title>
-              </v-list-item-content>
+                  <v-list-item-title>Ventas</v-list-item-title>
+                </v-list-item-content>
             </template>
-            <v-list-item :to="{ name: ''}">
+            <v-list-item :to="{ path: 'Ejemplo_05'}">
+              <v-list-item-title>Sub-modulo-4</v-list-item-title>
               <v-list-item-icon>
-                <v-icon>face</v-icon>
+                <v-icon>wb_iridescent</v-icon>
               </v-list-item-icon>
-              <v-list-item-title>Sub-modulo2</v-list-item-title>
             </v-list-item>
-            <v-list-item :to="{ name: ''}">
+            <v-list-item :to="{ path: 'Ejemplo_06'}">
+              <v-list-item-title>Sub-modulo-4</v-list-item-title>
               <v-list-item-icon>
-                <v-icon>manage_accounts</v-icon>
+                <v-icon>wb_iridescent</v-icon>
               </v-list-item-icon>
-              <v-list-item-title>Sub-modulo2</v-list-item-title>
-            </v-list-item> 
+            </v-list-item>
           </v-list-group>
         </template>
       </v-list>
