@@ -1,7 +1,7 @@
 const Joi = require('joi');
 
 const id = Joi.number().integer();
-const expirationDate = Joi.date().format('YYYY-MM-DD').utc();
+const expirationDate = Joi.date();
 const quantity = Joi.number().integer();
 const productId = Joi.number().integer();
 
