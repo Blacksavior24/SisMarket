@@ -1,6 +1,6 @@
 'use strict';
 
-const {InventorySchema, INVENTORY_TABLE} = require('./../models/inventory.models');
+const {InventorySchema, INVENTORY_TABLE} = require('./../models/inventory.model');
 
 module.exports = {
   up: async (queryInterface) => {
