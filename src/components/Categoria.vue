@@ -18,10 +18,19 @@
                           <v-container grid-list-md>
                               <v-layout wrap>
                                   <v-flex xs12 sm12 md12>
+                                      <v-text-field v-model="id_categoria" label="ID"></v-text-field>
+                                  </v-flex>
+                                  <v-flex xs12 sm12 md12>
                                       <v-text-field v-model="nombre_Categoria" label="Nombre"></v-text-field>
                                   </v-flex>
                                   <v-flex xs12 sm12 md12>
                                       <v-text-field v-model="nombre_Descripcion" label="Descripcion"></v-text-field>
+                                  </v-flex>
+                                  <v-flex xs12 sm12 md12>
+                                      <v-select v-model="estado_categoria" :items="estado" label="Estado"></v-select>
+                                  </v-flex>
+                                  <v-flex xs12 sm12 md12 v-show="valida">
+                                      <div class="red--text" v-for="v in valida_Mensaje" :key="v" v-text="v"></div>
                                   </v-flex>
                               </v-layout>
                           </v-container>
@@ -53,8 +62,17 @@
                   <template v-slot:[`item.actions`]="{ item }">
                       <td>
                           <v-icon small class="mr-2" @click="editItem(item)">edit</v-icon>
-                          <v-icon small class="mr-2" @click="deleteItem(item)">published_with_changes</v-icon>
-                          <v-icon small>business</v-icon>
+                          <v-icon small class="mr-2" @click="deleteItem(item)">delete</v-icon>
+                      </td>
+                  </template>
+                  <template v-slot:[`item.state`]="{ item }">
+                      <td>
+                          <div v-if="item.state">
+                              <span class="blue--text">Activo</span>
+                          </div>
+                          <div v-else>
+                              <span class="red--text">Inactivo</span>
+                          </div>
                       </td>
                   </template>
                   <template v-slot:no-data>
@@ -76,13 +94,25 @@
             /*Listar Categoria */
             listaCategoria: [
                 { text: 'Nombre', value: 'name' },
-                //{ text: 'Fecha', value: 'created_at', sortable: false },
-                { text: 'Descripción', value: '', sortable: false  },
-                { text: 'Estado', value: '', sortable: false  }
+                { text: 'Descripción', value: 'description', sortable: false  },
+                { text: 'Estado', value: 'state', sortable: false  },
+                { text: 'Opciones', value: 'actions', sortable: false }
             ],
             categoria:[],
+            id_categoria:'',
             nombre_Categoria:'',
             nombre_Descripcion:'',
+            estado_categoria: null,
+            estado: [
+                {
+                    text: "Activo",
+                    value: true
+                },
+                {
+                    text: "Inactivo",
+                    value: false
+                },
+            ],
             /*Validar Datos */
             valida: 0,
             valida_Mensaje:[],
@@ -93,7 +123,7 @@
         }),
         computed: {
             formTitle () {
-                return this.editedIndex === -1 ? 'Nuevo categoria' : 'Actualizar categoria'
+                return this.editedIndex === -1 ? 'Nueva categoría' : 'Actualizar categoria'
             },
         },
 
@@ -128,6 +158,10 @@
 
             editItem (item) {
                 //Varriales para editar
+                this.id_categoria=item.id;
+                this.nombre_Categoria=item.name;
+                this.nombre_Descripcion=item.description;
+                this.estado_categoria=item.state;
                 this.editedIndex=1;
                 this.dialog = true
             },
@@ -156,8 +190,10 @@
                 })
             },
             limpiar(){
+                this.id_categoria="";
                 this.nombre_Categoria="";
                 this.nombre_Descripcion="";
+                this.estado_categoria=null;
 
                 //Val limpiar
                 this.valida="";
@@ -170,12 +206,29 @@
                 }
                 if (this.editedIndex > -1) {
                     //Codigo para editar
+                    let me=this;
+                    axios.patch('api/v1/categories/'+parseInt(this.id_categoria),{
+                        //Valores post,
+                        //'id': parseInt(me.id_categoria),
+                        'name': me.nombre_Categoria,
+                        'description': me.nombre_Descripcion,
+                        'state': me.estado_categoria
+                    }).then(function(response){
+                        me.listar();
+                        me.close();
+                        me.limpiar();
+                    }).catch(function(error){
+                        console.log(error)
+                    });
                 } else {
                     //Codigo para guardar
                     let me=this;
-                    axios.post('',{
+                    axios.post('api/v1/categories',{
                         //Valores post,
-                        
+                        'id': parseInt(me.id_categoria),
+                        'name': me.nombre_Categoria,
+                        'description': me.nombre_Descripcion,
+                        'state': me.estado_categoria
                     }).then(function(response){
                         me.listar();
                         me.close();
@@ -191,7 +244,12 @@
 
                 //Validaciones requeridas
                 //
-                //
+                if (this.nombre_Categoria.length<3 || this.nombre_Categoria >50){
+                    this.valida_Mensaje.push("El nombre debe tener mas de 3 caracteres y menos de 50 caracteres");
+                }
+                if (this.nombre_Descripcion.length<5 || this.nombre_Descripcion >50){
+                    this.valida_Mensaje.push("El descripción debe tener mas de 5 caracteres y menos de 50 caracteres");
+                }
                 if (this.valida_Mensaje.length){
                     this.valida=1;
                 }
