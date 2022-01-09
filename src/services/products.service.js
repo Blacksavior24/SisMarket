@@ -20,6 +20,12 @@ class ProductsService {
   }
 
   async findOne(id) {
+    const product = await models.Product.findByPk(id);
+    if(!product){
+      throw boom.notFound('product no encontrado');
+    }
+    return product;
+    /*
     const product = this.products.find(item => item.id === id);
     if (!product) {
       throw boom.notFound('product not found');
@@ -27,7 +33,7 @@ class ProductsService {
     if (product.isBlock) {
       throw boom.conflict('product is block');
     }
-    return product;
+    return product;*/
   }
 
   async update(id, changes) {
