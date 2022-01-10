@@ -70,7 +70,7 @@
                 <v-icon>category</v-icon>
               </v-list-item-icon>
             </v-list-item>
-            <v-list-item :to="{ path: 'Ejemplo_02'}">
+            <v-list-item :to="{ path: 'Productos'}">
               <v-list-item-title>Productos</v-list-item-title>
               <v-list-item-icon>
                 <v-icon>fence</v-icon>

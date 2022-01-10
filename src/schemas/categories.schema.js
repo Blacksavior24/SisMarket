@@ -3,7 +3,7 @@ const Joi = require('joi');
 const id = Joi.number().integer();
 const name = Joi.string().min(3);
 const description = Joi.string().min(5);
-const state = Joi.number();
+const state = Joi.boolean();
 
 const createCategorySchema = Joi.object({
   name: name.required(),

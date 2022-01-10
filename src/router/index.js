@@ -6,6 +6,7 @@ import login from '../components/Login.vue'
 import cambiarPassword from '../components/CambiarPassword.vue'
 import recuperarPassword from '../components/RecuperarPassword.vue'
 import Categoria from '../components/Categoria.vue'
+import Productos from '../components/Productos.vue'
 
 Vue.use(VueRouter)
 
@@ -39,6 +40,11 @@ const routes = [
     path: '/Categoria',
     name: 'Categoria',
     component: Categoria
+  },
+  {
+    path: '/Productos',
+    name: 'Productos',
+    component: Productos
   }
 ]
 
