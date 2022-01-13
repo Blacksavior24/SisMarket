@@ -3,7 +3,7 @@
       <v-layout justify-center>
           <v-flex>
               <v-toolbar flat>
-                  <v-toolbar-title>Categoria</v-toolbar-title>
+                  <v-toolbar-title>Categoría</v-toolbar-title>
                   <v-divider class="mx-2" inset vertical></v-divider>
                   <v-spacer></v-spacer>
                   <v-text-field class="text-xs-center" v-model="search" append-icon="search" label="Búsqueda" single-line hide-details></v-text-field>
@@ -45,8 +45,8 @@
                           <v-card-title class="headline" v-if="adAccion==2">¿Desactivar Item?</v-card-title>
                           <v-card-text>
                               Estas a punto de
-                              <span v-if="adAccion==1">Activar</span>
-                              <span v-if="adAccion==2">Desactivar</span>
+                              <span v-if="adAccion==1">activar</span>
+                              <span v-if="adAccion==2">desactivar</span>
                               el item {{adNombre}}
                           </v-card-text>
                           <v-card-actions>
@@ -114,14 +114,8 @@
             nombre_Descripcion:'',
             estado_categoria: null,
             estado: [
-                {
-                    text: "Activo",
-                    value: true
-                },
-                {
-                    text: "Inactivo",
-                    value: false
-                },
+                { text: "Activo", value: true},
+                { text: "Inactivo", value: false},
             ],
             /*Validar Datos */
             valida: 0,
@@ -268,6 +262,8 @@
                 }
                 return this.valida;
             },
+            //Activar desactivar
+
             activarDesactivar(state, item){
                 this.adModal=1;
                 this.adNombre=item.name;

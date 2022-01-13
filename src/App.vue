@@ -65,7 +65,7 @@
                 </v-list-item-content>
             </template>
             <v-list-item :to="{ path: 'Categoria'}">
-              <v-list-item-title>Categorias</v-list-item-title>
+              <v-list-item-title>Categorías</v-list-item-title>
               <v-list-item-icon>
                 <v-icon>category</v-icon>
               </v-list-item-icon>
