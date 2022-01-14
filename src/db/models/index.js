@@ -7,6 +7,8 @@ const {Inventory, InventorySchema} = require('./inventory.model');
 const {Provider, ProviderSchema} = require('./provider.model');
 const {PurchaseOrder, PurchaseOrderSchema} = require('./purchaseorder.model')
 
+const {Client, ClientSchema} = require('./client.model');
+
 function setupModels(sequelize){
   User.init(UserSchema, User.config(sequelize));
 
@@ -14,15 +16,20 @@ function setupModels(sequelize){
   Product.init(ProductSchema, Product.config(sequelize));
   Inventory.init(InventorySchema, Inventory.config(sequelize));
 
+  
   Provider.init(ProviderSchema, Provider.config(sequelize));
   PurchaseOrder.init(PurchaseOrderSchema, PurchaseOrder.config(sequelize));
 
+  Client.init(ClientSchema, Client.config(sequelize));
+    
   Category.associate(sequelize.models);
   Product.associate(sequelize.models);
   Inventory.associate(sequelize.models);
 
   Provider.associate(sequelize.models);
   PurchaseOrder.associate(sequelize.models);
+
+  Client.associate(sequelize.models);
 }
 
 
