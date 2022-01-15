@@ -36,6 +36,12 @@ const PurchaseOrderSchema = {
 class PurchaseOrder extends Model{
   static associate(models){
     this.belongsTo(models.Provider, {as: 'provider'});
+    this.belongsToMany(models.PurchaseOrder,{
+      as: 'items',
+      through: models.PurchaseOrderProduct,
+      foreignKey: 'purchaseorderId',
+      otherKey: 'productId'
+    })
   }
   static config(sequelize){
     return{

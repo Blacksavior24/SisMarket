@@ -9,6 +9,8 @@ const {PurchaseOrder, PurchaseOrderSchema} = require('./purchaseorder.model')
 
 const {Client, ClientSchema} = require('./client.model');
 
+const {PurchaseOrderProduct, PurchaseOrderProductSchema} = require('./purchaseorder-product.model');
+
 function setupModels(sequelize){
   User.init(UserSchema, User.config(sequelize));
 
@@ -22,6 +24,8 @@ function setupModels(sequelize){
 
   Client.init(ClientSchema, Client.config(sequelize));
 
+  PurchaseOrderProduct.init(PurchaseOrderProductSchema, PurchaseOrderProduct.config(sequelize));
+
   Category.associate(sequelize.models);
   Product.associate(sequelize.models);
   Inventory.associate(sequelize.models);
@@ -30,6 +34,7 @@ function setupModels(sequelize){
   PurchaseOrder.associate(sequelize.models);
 
   //Client.associate(sequelize.models);
+  PurchaseOrderProduct.associate(sequelize.models);
 }
 
 
