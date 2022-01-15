@@ -29,7 +29,7 @@ function setupModels(sequelize){
   Provider.associate(sequelize.models);
   PurchaseOrder.associate(sequelize.models);
 
-  Client.associate(sequelize.models);
+  //Client.associate(sequelize.models);
 }
 
 

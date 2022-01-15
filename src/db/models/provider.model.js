@@ -38,7 +38,7 @@ const ProviderSchema = {
 
 class Provider extends Model{
   static associate(models){
-    this.hasMany(models.PuchaseOrder,{
+    this.hasMany(models.PurchaseOrder,{
       as: 'purchaseorders',
       foreignKey: 'purchaseOrderId'
     });

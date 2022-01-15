@@ -12,7 +12,7 @@ const phone = Joi.string();
 const status = Joi.string();
 
 const createUserSchema = Joi.object({
-  id: id.required(),
+  //id: id.required(),
   user: user.required(),
   fullname: fullname.required(),
   typeIDcard: typeIDcard.required(),
