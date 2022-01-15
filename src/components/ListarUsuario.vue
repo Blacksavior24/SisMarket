@@ -1,5 +1,6 @@
 <template>
-    <v-layout align-start>
+    <v-container fluid>
+    <v-layout justify-center>
         <v-flex>
             <v-toolbar color="white">
                 <v-toolbar-title>Usuario</v-toolbar-title>
@@ -31,13 +32,13 @@
 
                             <v-card-text>
 
-                            <v-container grid-list-md>
+                            <!--v-container grid-list-md>
                                 <v-row>
                                     <v-col xs12 sm6 md4>
                                         <v-text-field v-model="id" label="ID"></v-text-field>
                                     </v-col>
                                 </v-row>
-                            </v-container>
+                            </v-container>-->
 
                             <v-container grid-list-md>
                                 <v-row>
@@ -123,13 +124,14 @@
             </v-data-table>
         </v-flex>
     </v-layout>
+    </v-container>
 </template>
 <script>
     import axios from 'axios';
     export default {
         data(){
             return {
-                id: '',
+                //id: '',
 
                 user: '',
                 fullname: '',
@@ -205,7 +207,7 @@
             },
             initialize () {
                 let me=this;
-                axios.get('http://localhost:3000/api/v1/users').then(function(response){
+                axios.get('api/v1/users').then(function(response){
                     //console.log(response);
                     me.desserts=response.data;
                 }).catch(function(error){
@@ -230,7 +232,7 @@
 
             deleteItem (item) {
                 let me = this;
-                axios.delete('http://localhost:3000/api/v1/users/'+item.id).then(function(response){
+                axios.delete('api/v1/users/'+item.id).then(function(response){
                     me.initialize();
                     alert("Eliminado correctamente")
                 }).catch(function(error){
@@ -244,7 +246,7 @@
             },
 
             limpiar(){
-                this.id = "";
+                //this.id = "";
                 this.user = "";
                 this.fullname = "";
                 this.typeIDcard = "";
@@ -261,8 +263,8 @@
                 if (this.editedIndex > -1) {
                     //Object.assign(this.desserts[this.editedIndex], this.editedItem)
                     let me = this;
-                    axios.patch('http://localhost:3000/api/v1/users/'+parseInt(this.id),{
-                        'id': parseInt(this.id),
+                    axios.patch('api/v1/users/'+parseInt(this.id),{
+                        //'id': parseInt(this.id),
                         'user': this.user,
                         'fullname': this.fullname,
                         'typeIDcard': this.typeIDcard,
@@ -283,8 +285,8 @@
                 } else {
                     //this.desserts.push(this.editedItem)
                     let me = this;
-                    axios.post('http://localhost:3000/api/v1/users/',{
-                        'id': parseInt(this.id),
+                    axios.post('api/v1/users/',{
+                        //'id': parseInt(this.id),
                         'user': this.user,
                         'fullname': this.fullname,
                         'typeIDcard': this.typeIDcard,
