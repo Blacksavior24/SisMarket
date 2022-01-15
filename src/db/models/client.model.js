@@ -40,7 +40,12 @@ const ClientSchema = {
 
 class Client extends Model{
   static associate(){
-    //associate
+    this.belongsToMany(models.User,{
+      as: 'clientes',
+      through: model.UserClient,
+      foreignKey: 'userId',
+      otherKey: 'clientId'
+    })
   }
   static config(sequelize){
     return{
