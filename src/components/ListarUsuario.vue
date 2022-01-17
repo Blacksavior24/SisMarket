@@ -130,8 +130,6 @@
     export default {
         data(){
             return {
-                //id: '',
-
                 user: '',
                 fullname: '',
                 typeIDcard: '',
@@ -145,19 +143,17 @@
                 dialog: false,
                 headers: [
                     { text: 'Usuario', align: 'left', value: 'user',sortable: false },
-                    { text: 'Nombre Apellido', value: 'fullname' },
-                    { text: 'Tipo Documento', value: 'typeIDcard',sortable: false },
-                    { text: 'Num. Documento', value: 'IDcard',sortable: false },
-                    { text: 'Correo', value: 'email',sortable: false },
-                    { text: 'Rol', value: 'role',sortable: false },
-                    { text: 'Teléfono', value: 'phone',sortable: false },
-                    { text: 'Password', value: 'password',sortable: false },
-                    { text: 'Estado', value: 'status',sortable: false },
-                    { text: 'Opciones', value: 'opciones', sortable: false }
+                    { text: 'Nombre Apellido', align: 'left', value: 'fullname' },
+                    { text: 'Tipo Documento', align: 'center', value: 'typeIDcard',sortable: false },
+                    { text: 'Num. Documento', align: 'center', value: 'IDcard',sortable: false },
+                    { text: 'Correo', align: 'center', value: 'email',sortable: false },
+                    { text: 'Rol', align: 'center', value: 'role',sortable: false },
+                    { text: 'Teléfono', align: 'center', value: 'phone',sortable: false },
+                    { text: 'Password', align: 'center', value: 'password',sortable: false },
+                    { text: 'Estado', align: 'center', value: 'status',sortable: false },
+                    { text: 'Opciones', align: 'center', value: 'opciones', sortable: false }
                 ],
                 search: '',
-
-
                 
                 desserts: [],
                 editedIndex: -1,
@@ -211,7 +207,6 @@
             initialize () {
                 let me=this;
                 axios.get('api/v1/users').then(function(response){
-                    //console.log(response);
                     me.desserts=response.data;
                 }).catch(function(error){
                     console.log(error);
@@ -250,7 +245,6 @@
             },
 
             limpiar(){
-                //this.id = "";
                 this.user = "";
                 this.fullname = "";
                 this.typeIDcard = "";
@@ -267,10 +261,8 @@
                 if (this.editedIndex > -1) {
                     this.validarDatos()
                     if(this.result == ""){
-                        //Object.assign(this.desserts[this.editedIndex], this.editedItem)
                         let me = this;
                         axios.patch('api/v1/users/'+parseInt(this.id),{
-                            //'id': parseInt(this.id),
                             'user': this.user,
                             'fullname': this.fullname,
                             'typeIDcard': this.typeIDcard,
@@ -280,7 +272,6 @@
                             'phone': this.phone,
                             'password': this.password,
                             'status': this.status
-                            //'createdAt': "2021-12-23T00:00:00.000Z"
                         }).then(function(response){
                             me.close();
                             me.initialize();
@@ -293,10 +284,8 @@
                 } else {
                     this.validarDatos()
                     if(this.result == ""){
-                        //this.desserts.push(this.editedItem)
                         let me = this;
                         axios.post('api/v1/users/',{
-                            //'id': parseInt(this.id),
                             'user': this.user,
                             'fullname': this.fullname,
                             'typeIDcard': this.typeIDcard,
@@ -306,7 +295,6 @@
                             'phone': this.phone,
                             'password': this.password,
                             'status': this.status,
-                            //'createdAt': "2021-12-23T00:00:00.000Z"
                         }).then(function(response){
                             me.close();
                             me.initialize();
@@ -317,19 +305,16 @@
 
                     }
                 }
-                //this.close();
             },
             validarDatos(){
                 if(this.user != "" && this.fullname!= "" && this.typeIDcard!= "" && this.IDcard!= "" && this.email!= "" && this.role!= "" && this.phone!= "" && this.password!= "" && this.status!= ""){
                     if(this.password.length < 8){
                         this.result = "La contraseña necesita mínimo 8 caracteres"
-                        //result = 1
                     }else{
                         this.result = ""
                     }
                 }else{
                     this.result = "Verifique si todos sus datos estan ingresados"
-                    //result = 2
                 }
             }
         }
