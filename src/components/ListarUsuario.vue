@@ -2,7 +2,7 @@
     <v-container fluid>
     <v-layout justify-center>
         <v-flex>
-            <v-toolbar color="white">
+            <v-toolbar color="white" flat>
                 <v-toolbar-title>Usuario</v-toolbar-title>
                     <v-divider
                     class="mx-2"
@@ -10,11 +10,10 @@
                     vertical
                     ></v-divider>
                     <v-spacer></v-spacer>
-                    <v-text-field class="text-xs-center" v-model="search" append-icon="search" label="Búsqueda" single-line hide-details></v-text-field>
+                    <v-text-field class="text-xs-center" v-model="search" append-icon="search" label="Buscar Nombre-Apellido" single-line hide-details></v-text-field>
                     <v-spacer></v-spacer>
 
                     <v-dialog v-model="dialog" max-width="500px">
-                        <!--<v-btn slot="activator" color="primary" dark class="mb-2">Agregar nuevo</v-btn>-->
                         <template v-slot:activator="{ on, attrs }">
                             <v-btn
                             v-bind="attrs"
@@ -31,14 +30,6 @@
                             </v-card-title>
 
                             <v-card-text>
-
-                            <!--v-container grid-list-md>
-                                <v-row>
-                                    <v-col xs12 sm6 md4>
-                                        <v-text-field v-model="id" label="ID"></v-text-field>
-                                    </v-col>
-                                </v-row>
-                            </v-container>-->
 
                             <v-container grid-list-md>
                                 <v-row>
@@ -91,7 +82,7 @@
                                 </v-row>
                             </v-container>
                             </v-card-text>
-
+                            <p class="ml-7 red--text">{{result}}</p>
                             <v-card-actions>
                             <v-spacer></v-spacer>
                             <v-btn color="primary" @click.native="close">Cancelar</v-btn>
@@ -120,6 +111,14 @@
                     >
                         delete
                     </v-icon>
+                </template>
+                <template v-slot:[`item.status`]="{ item }">
+                    <div v-if="item.status == 'activo'">
+                        <span class="blue--text">Activo</span>
+                    </div>
+                    <div v-else>
+                        <span class="red--text">Inactivo</span>
+                    </div>
                 </template>
             </v-data-table>
         </v-flex>
@@ -150,13 +149,16 @@
                     { text: 'Tipo Documento', value: 'typeIDcard',sortable: false },
                     { text: 'Num. Documento', value: 'IDcard',sortable: false },
                     { text: 'Correo', value: 'email',sortable: false },
-                    { text: 'Rol', value: 'role' },
+                    { text: 'Rol', value: 'role',sortable: false },
                     { text: 'Teléfono', value: 'phone',sortable: false },
                     { text: 'Password', value: 'password',sortable: false },
                     { text: 'Estado', value: 'status',sortable: false },
                     { text: 'Opciones', value: 'opciones', sortable: false }
                 ],
                 search: '',
+
+
+                
                 desserts: [],
                 editedIndex: -1,
                 tDocumento: ['DNI', 'RUC', 'PASAPORTE'],
@@ -183,13 +185,14 @@
                     phone:'',
                     password: '',
                     status: '',
-                    }
+                    },
+                result: ""
             }
         },
         computed: {
             formTitle () {
             return this.editedIndex === -1 ? 'Agregar nuevo' : 'Editar usuario'
-            }
+            },
         },
 
         watch: {
@@ -241,6 +244,7 @@
             },
 
             close () {
+            this.result = ""
             this.dialog = false
             this.limpiar();
             },
@@ -261,51 +265,72 @@
 
             save () {
                 if (this.editedIndex > -1) {
-                    //Object.assign(this.desserts[this.editedIndex], this.editedItem)
-                    let me = this;
-                    axios.patch('api/v1/users/'+parseInt(this.id),{
-                        //'id': parseInt(this.id),
-                        'user': this.user,
-                        'fullname': this.fullname,
-                        'typeIDcard': this.typeIDcard,
-                        'IDcard': this.IDcard,
-                        'email': this.email,
-                        'role': this.role,
-                        'phone': this.phone,
-                        'password': this.password,
-                        'status': this.status
-                        //'createdAt': "2021-12-23T00:00:00.000Z"
-                    }).then(function(response){
-                        me.close();
-                        me.initialize();
-                        me.limpiar();
-                    }).catch(function(error){
-                        console.log(error)
-                    })
+                    this.validarDatos()
+                    if(this.result == ""){
+                        //Object.assign(this.desserts[this.editedIndex], this.editedItem)
+                        let me = this;
+                        axios.patch('api/v1/users/'+parseInt(this.id),{
+                            //'id': parseInt(this.id),
+                            'user': this.user,
+                            'fullname': this.fullname,
+                            'typeIDcard': this.typeIDcard,
+                            'IDcard': this.IDcard,
+                            'email': this.email,
+                            'role': this.role,
+                            'phone': this.phone,
+                            'password': this.password,
+                            'status': this.status
+                            //'createdAt': "2021-12-23T00:00:00.000Z"
+                        }).then(function(response){
+                            me.close();
+                            me.initialize();
+                            me.limpiar();
+                        }).catch(function(error){
+                            console.log(error)
+                        })
+                    }
+    
                 } else {
-                    //this.desserts.push(this.editedItem)
-                    let me = this;
-                    axios.post('api/v1/users/',{
-                        //'id': parseInt(this.id),
-                        'user': this.user,
-                        'fullname': this.fullname,
-                        'typeIDcard': this.typeIDcard,
-                        'IDcard': this.IDcard,
-                        'email': this.email,
-                        'role': this.role,
-                        'phone': this.phone,
-                        'password': this.password,
-                        'status': this.status,
-                        //'createdAt': "2021-12-23T00:00:00.000Z"
-                    }).then(function(response){
-                        me.close();
-                        me.initialize();
-                        me.limpiar();
-                    }).catch(function(error){
-                        console.log(error)
-                    })
+                    this.validarDatos()
+                    if(this.result == ""){
+                        //this.desserts.push(this.editedItem)
+                        let me = this;
+                        axios.post('api/v1/users/',{
+                            //'id': parseInt(this.id),
+                            'user': this.user,
+                            'fullname': this.fullname,
+                            'typeIDcard': this.typeIDcard,
+                            'IDcard': this.IDcard,
+                            'email': this.email,
+                            'role': this.role,
+                            'phone': this.phone,
+                            'password': this.password,
+                            'status': this.status,
+                            //'createdAt': "2021-12-23T00:00:00.000Z"
+                        }).then(function(response){
+                            me.close();
+                            me.initialize();
+                            me.limpiar();
+                        }).catch(function(error){
+                            console.log(error)
+                        })
+
+                    }
                 }
-                this.close();
+                //this.close();
+            },
+            validarDatos(){
+                if(this.user != "" && this.fullname!= "" && this.typeIDcard!= "" && this.IDcard!= "" && this.email!= "" && this.role!= "" && this.phone!= "" && this.password!= "" && this.status!= ""){
+                    if(this.password.length < 8){
+                        this.result = "La contraseña necesita mínimo 8 caracteres"
+                        //result = 1
+                    }else{
+                        this.result = ""
+                    }
+                }else{
+                    this.result = "Verifique si todos sus datos estan ingresados"
+                    //result = 2
+                }
             }
         }
     }
