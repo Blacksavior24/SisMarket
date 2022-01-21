@@ -22,6 +22,8 @@ const options = {
 */
 app.use(cors());
 
+require('./src/utils/auth');
+
 app.get('/', (req, res)=>{
   res.send('hola mi server');
 });
