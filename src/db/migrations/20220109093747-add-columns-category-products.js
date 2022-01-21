@@ -6,10 +6,10 @@ const {ProductSchema, PRODUCT_TABLE} = require('./../models/product.model');
 
 module.exports = {
   up: async (queryInterface) => {
-    await queryInterface.addColumn(CATEGORY_TABLE, 'description', CategorySchema.description);
-    await queryInterface.addColumn(CATEGORY_TABLE, 'state', CategorySchema.state);
-    await queryInterface.addColumn(PRODUCT_TABLE, 'purchasePrice', ProductSchema.purchasePrice);
-    await queryInterface.addColumn(PRODUCT_TABLE, 'salePrice', ProductSchema.salePrice);
+    //await queryInterface.addColumn(CATEGORY_TABLE, 'description', CategorySchema.description);
+    //await queryInterface.addColumn(CATEGORY_TABLE, 'state', CategorySchema.state);
+    //await queryInterface.addColumn(PRODUCT_TABLE, 'purchasePrice', ProductSchema.purchasePrice);
+    //await queryInterface.addColumn(PRODUCT_TABLE, 'salePrice', ProductSchema.salePrice);
   },
 
   down: async (queryInterface) => {
