@@ -39,10 +39,10 @@ const ClientSchema = {
 }
 
 class Client extends Model{
-  static associate(){
+  static associate(models){
     this.belongsToMany(models.User,{
       as: 'clientes',
-      through: model.UserClient,
+      through: models.UserClient,
       foreignKey: 'userId',
       otherKey: 'clientId'
     })
