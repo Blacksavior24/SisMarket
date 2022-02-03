@@ -48,25 +48,20 @@
                 <v-btn
                     color="blue darken-1"
                     dark
-                    @click="Ingresar"
+                    @click="ingresar"
                 >
                     Ingresar
                 </v-btn>
-                <!--<v-btn
-                    text
-                    :to="{name: 'registroUsuario'}"
-                >
-                    Registrarse
-                </v-btn>-->
             </v-card-actions>
         </v-card>
     </v-dialog>
 </template>
 <script>
+import axios from 'axios';
 export default {
     data:()=>({
         dialog: true,
-        nombreusuario: '',
+        nombreUsuario: '',
         password: '',
         rules: {
            required: value => !!value || 'Campo requerido',
@@ -76,7 +71,19 @@ export default {
     }),
     methods:{
         ingresar(){
-
+            let me=this;
+            axios.post('api/v1/auth/login',{
+                'email': me.nombreUsuario,
+                'password': me.password,
+            }).then(function(response){
+                localStorage.setItem('dato', response.data)
+                console.log(response.data)
+                me.$router.push('/')
+                me.nombreUsuario= ''
+                me.password= ''
+            }).catch(function(error){
+                console.log(error);
+            });
         }
     },
     computed:{

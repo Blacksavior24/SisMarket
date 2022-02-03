@@ -13,7 +13,10 @@
       <v-spacer></v-spacer>
       <!--<h1>Icono de usuarios y salir Ingeniería de sistemas</h1>-->
       <div class="text-center">
-        <v-btn icon>
+        <v-btn 
+        @click="cerrarSesion"
+        icon
+        >
           <v-icon>exit_to_app</v-icon>
         </v-btn>
       </div>
@@ -138,7 +141,7 @@
           class="primary lighten py-4 text-center white--text"
           cols="top"
         >
-          {{ new Date().getFullYear() }} — <strong>Footer</strong>
+          {{ new Date().getFullYear() }} — <strong>SisMarket</strong>
         </v-col>
       </v-row>
     </v-footer>
@@ -172,6 +175,20 @@ export default {
       //dialog: false,
       
   }),
+  methods: {
+    cerrarSesion(){
+      localStorage.clear()
+      this.drawer= false
+      this.$router.push('/login')
+    }
+  },
+  mounted(){
+    if(localStorage.getItem('dato')){
+      this.$router.push('/')
+    }else if(this.$router.push('/')){
+      this.$router.push('/login')
+    }
+  },
   watch: {
     group () {
       this.drawer = false
