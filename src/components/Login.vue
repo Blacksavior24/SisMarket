@@ -17,9 +17,9 @@
                         <v-row>
                             <v-col cols="12">
                                 <v-text-field
-                                prepend-icon="account_circle"
+                                prepend-icon="email"
                                 v-model="nombreUsuario"
-                                label="Nombre usuario"
+                                label="Ingrese su correo"
                                 type="text"
                                 :rules="[rules.required]"
                                 required
