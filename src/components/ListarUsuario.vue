@@ -10,9 +10,9 @@
                     vertical
                     ></v-divider>
                     <v-spacer></v-spacer>
-                    <v-text-field class="text-xs-center" v-model="search" append-icon="search" label="Buscar Nombre-Apellido" single-line hide-details></v-text-field>
+                    <v-text-field class="text-xs-center" v-model="search" append-icon="search" label="Buscar" single-line hide-details></v-text-field>
                     <v-spacer></v-spacer>
-
+                    <v-btn color="primary" dark class="mx-3" @click="imprimirListaUsuario">Imprimir</v-btn>
                     <v-dialog v-model="dialog" max-width="500px">
                         <template v-slot:activator="{ on, attrs }">
                             <v-btn
@@ -127,6 +127,7 @@
 </template>
 <script>
     import axios from 'axios';
+    import jsPDF from 'jspdf'; 
     export default {
         data(){
             return {
@@ -182,7 +183,8 @@
                     password: '',
                     status: '',
                     },
-                result: ""
+                result: "",
+                dataImprimir: [],
             }
         },
         computed: {
@@ -316,7 +318,30 @@
                 }else{
                     this.result = "Verifique si todos sus datos estan ingresados"
                 }
-            }
+            },
+            imprimirListaUsuario(){
+                this.actualizarTabla();
+                require('jspdf-autotable');
+                var opciones = {
+                    orientation: 'p',
+                    unit: 'mm',
+                    format: [240, 300]
+                };
+            
+                var doc = new jsPDF(opciones);
+                doc.setFontSize(20);
+                doc.text(15, 25, 'Usuarios')
+                var columns = ["Nombre usuario", "Nombre Completo", "Estado"];
+                doc.autoTable(columns,this.dataImprimir,
+                    { margin:{ top: 35 }}
+                );
+                doc.save('ListaUsuarios.pdf');
+            },
+            actualizarTabla(){
+                for(var i=0; i<this.desserts.length; i++){
+                    this.dataImprimir.push([this.desserts[i].user, this.desserts[i].fullname, this.desserts[i].status])
+                }
+            },
         }
     }
 </script>
