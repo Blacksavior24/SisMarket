@@ -69,7 +69,17 @@ e instalará los siguientes paquetes:
 -   "vue-template-compiler": "^2.6.11",
 -   "vuetify-loader": "^1.7.0"
 
+# Corriendo base de datos en el contenedor docker
 
+- Una vez entrando al localhost:5050 veremos un entorno gráfico pgdamin
+- Luego de eso se pone "agregar servidor"
+- Pone cualquier nombre
+- En el lado de conexión :
+  - Dirección del servidor: postgres
+  - Base de datos mantenimiento: SisMarket or my_store
+  - Usuario: ward
+  - Pass: admin123
+ 
 # Iniciando la aplicación
 ...
 # SisMarket
